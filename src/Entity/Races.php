@@ -29,7 +29,7 @@ class Races
     private $round;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\circuits")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Circuits")
      * @ORM\JoinColumn(nullable=false)
      */
     private $circuit;

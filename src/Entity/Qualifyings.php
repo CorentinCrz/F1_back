@@ -17,19 +17,19 @@ class Qualifyings
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\races")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Races")
      * @ORM\JoinColumn(nullable=false)
      */
     private $race;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\drivers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Drivers")
      * @ORM\JoinColumn(nullable=false)
      */
     private $driver;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\constructors")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Constructors")
      * @ORM\JoinColumn(nullable=false)
      */
     private $constructor;

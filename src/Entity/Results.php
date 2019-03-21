@@ -17,19 +17,19 @@ class Results
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\races", inversedBy="results")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Races", inversedBy="results")
      * @ORM\JoinColumn(nullable=false)
      */
     private $race;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\drivers", inversedBy="results")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Drivers", inversedBy="results")
      * @ORM\JoinColumn(nullable=false)
      */
     private $driver;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\constructors", inversedBy="results")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Constructors", inversedBy="results")
      * @ORM\JoinColumn(nullable=false)
      */
     private $constructor;
@@ -95,7 +95,7 @@ class Results
     private $fastestLapSpeed;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\status")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Status")
      */
     private $status;
 

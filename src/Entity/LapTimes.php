@@ -17,13 +17,13 @@ class LapTimes
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\races", inversedBy="lapTimes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Races", inversedBy="lapTimes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $race;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\drivers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Drivers")
      * @ORM\JoinColumn(nullable=false)
      */
     private $driver;
