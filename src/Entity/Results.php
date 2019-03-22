@@ -212,12 +212,12 @@ class Results
         return $this;
     }
 
-    public function getTime(): ?\DateTimeInterface
+    public function getTime(): ?string
     {
         return $this->time;
     }
 
-    public function setTime(\DateTimeInterface $time): self
+    public function setTime(string $time): self
     {
         $this->time = $time;
 
@@ -260,24 +260,24 @@ class Results
         return $this;
     }
 
-    public function getFastestLapTime(): ?\DateTimeInterface
+    public function getFastestLapTime(): ?string
     {
         return $this->fastestLapTime;
     }
 
-    public function setFastestLapTime(\DateTimeInterface $fastestLapTime): self
+    public function setFastestLapTime(string $fastestLapTime): self
     {
         $this->fastestLapTime = $fastestLapTime;
 
         return $this;
     }
 
-    public function getFastestLapSpeed(): ?float
+    public function getFastestLapSpeed(): ?string
     {
         return $this->fastestLapSpeed;
     }
 
-    public function setFastestLapSpeed(float $fastestLapSpeed): self
+    public function setFastestLapSpeed(string $fastestLapSpeed): self
     {
         $this->fastestLapSpeed = $fastestLapSpeed;
 

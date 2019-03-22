@@ -38,14 +38,14 @@ class Constructors
      */
     private $url;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Results", mappedBy="constructor", orphanRemoval=true)
-     */
-    private $results;
+//    /**
+//     * @ORM\OneToMany(targetEntity="App\Entity\Results", mappedBy="constructor", orphanRemoval=true)
+//     */
+//    private $results;
 
     public function __construct()
     {
-        $this->results = new ArrayCollection();
+//        $this->results = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -101,34 +101,39 @@ class Constructors
         return $this;
     }
 
-    /**
-     * @return Collection|Results[]
-     */
-    public function getResults(): Collection
+//    /**
+//     * @return Collection|Results[]
+//     */
+//    public function getResults(): Collection
+//    {
+//        return $this->results;
+//    }
+//
+//    public function addResult(Results $result): self
+//    {
+//        if (!$this->results->contains($result)) {
+//            $this->results[] = $result;
+//            $result->setConstructor($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeResult(Results $result): self
+//    {
+//        if ($this->results->contains($result)) {
+//            $this->results->removeElement($result);
+//            // set the owning side to null (unless already changed)
+//            if ($result->getConstructor() === $this) {
+//                $result->setConstructor(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
+
+    public function __toString()
     {
-        return $this->results;
-    }
-
-    public function addResult(Results $result): self
-    {
-        if (!$this->results->contains($result)) {
-            $this->results[] = $result;
-            $result->setConstructor($this);
-        }
-
-        return $this;
-    }
-
-    public function removeResult(Results $result): self
-    {
-        if ($this->results->contains($result)) {
-            $this->results->removeElement($result);
-            // set the owning side to null (unless already changed)
-            if ($result->getConstructor() === $this) {
-                $result->setConstructor(null);
-            }
-        }
-
-        return $this;
+        return $this->getName();
     }
 }

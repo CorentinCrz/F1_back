@@ -124,36 +124,36 @@ class Qualifyings
         return $this;
     }
 
-    public function getQ1(): ?\DateTimeInterface
+    public function getQ1(): ?string
     {
         return $this->q1;
     }
 
-    public function setQ1(\DateTimeInterface $q1): self
+    public function setQ1(string $q1): self
     {
         $this->q1 = $q1;
 
         return $this;
     }
 
-    public function getQ2(): ?\DateTimeInterface
+    public function getQ2(): ?string
     {
         return $this->q2;
     }
 
-    public function setQ2(\DateTimeInterface $q2): self
+    public function setQ2(string $q2): self
     {
         $this->q2 = $q2;
 
         return $this;
     }
 
-    public function getQ3(): ?\DateTimeInterface
+    public function getQ3(): ?string
     {
         return $this->q3;
     }
 
-    public function setQ3(\DateTimeInterface $q3): self
+    public function setQ3(string $q3): self
     {
         $this->q3 = $q3;
 
