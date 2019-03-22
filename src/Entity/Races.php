@@ -54,20 +54,20 @@ class Races
      */
     private $url;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\LapTimes", mappedBy="race", orphanRemoval=true)
-     */
-    private $lapTimes;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Results", mappedBy="race", orphanRemoval=true)
-     */
-    private $results;
+//    /**
+//     * @ORM\OneToMany(targetEntity="App\Entity\LapTimes", mappedBy="race", orphanRemoval=true)
+//     */
+//    private $lapTimes;
+//
+//    /**
+//     * @ORM\OneToMany(targetEntity="App\Entity\Results", mappedBy="race", orphanRemoval=true)
+//     */
+//    private $results;
 
     public function __construct()
     {
-        $this->lapTimes = new ArrayCollection();
-        $this->results = new ArrayCollection();
+//        $this->lapTimes = new ArrayCollection();
+//        $this->results = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -159,65 +159,70 @@ class Races
         return $this;
     }
 
-    /**
-     * @return Collection|LapTimes[]
-     */
-    public function getLapTimes(): Collection
+//    /**
+//     * @return Collection|LapTimes[]
+//     */
+//    public function getLapTimes(): Collection
+//    {
+//        return $this->lapTimes;
+//    }
+//
+//    public function addLapTime(LapTimes $lapTime): self
+//    {
+//        if (!$this->lapTimes->contains($lapTime)) {
+//            $this->lapTimes[] = $lapTime;
+//            $lapTime->setRace($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeLapTime(LapTimes $lapTime): self
+//    {
+//        if ($this->lapTimes->contains($lapTime)) {
+//            $this->lapTimes->removeElement($lapTime);
+//            // set the owning side to null (unless already changed)
+//            if ($lapTime->getRace() === $this) {
+//                $lapTime->setRace(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * @return Collection|Results[]
+//     */
+//    public function getResults(): Collection
+//    {
+//        return $this->results;
+//    }
+//
+//    public function addResult(Results $result): self
+//    {
+//        if (!$this->results->contains($result)) {
+//            $this->results[] = $result;
+//            $result->setRace($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeResult(Results $result): self
+//    {
+//        if ($this->results->contains($result)) {
+//            $this->results->removeElement($result);
+//            // set the owning side to null (unless already changed)
+//            if ($result->getRace() === $this) {
+//                $result->setRace(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
+
+    public function __toString()
     {
-        return $this->lapTimes;
-    }
-
-    public function addLapTime(LapTimes $lapTime): self
-    {
-        if (!$this->lapTimes->contains($lapTime)) {
-            $this->lapTimes[] = $lapTime;
-            $lapTime->setRace($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLapTime(LapTimes $lapTime): self
-    {
-        if ($this->lapTimes->contains($lapTime)) {
-            $this->lapTimes->removeElement($lapTime);
-            // set the owning side to null (unless already changed)
-            if ($lapTime->getRace() === $this) {
-                $lapTime->setRace(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Results[]
-     */
-    public function getResults(): Collection
-    {
-        return $this->results;
-    }
-
-    public function addResult(Results $result): self
-    {
-        if (!$this->results->contains($result)) {
-            $this->results[] = $result;
-            $result->setRace($this);
-        }
-
-        return $this;
-    }
-
-    public function removeResult(Results $result): self
-    {
-        if ($this->results->contains($result)) {
-            $this->results->removeElement($result);
-            // set the owning side to null (unless already changed)
-            if ($result->getRace() === $this) {
-                $result->setRace(null);
-            }
-        }
-
-        return $this;
+        return $this->getName();
     }
 }

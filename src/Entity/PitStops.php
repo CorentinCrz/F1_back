@@ -118,12 +118,12 @@ class PitStops
         return $this;
     }
 
-    public function getDuration(): ?float
+    public function getDuration(): ?string
     {
         return $this->duration;
     }
 
-    public function setDuration(float $duration): self
+    public function setDuration(string $duration): self
     {
         $this->duration = $duration;
 
