@@ -35,7 +35,7 @@ class Results
     private $constructor;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $number;
 
@@ -45,7 +45,7 @@ class Results
     private $grid;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $position;
 
@@ -65,32 +65,32 @@ class Results
     private $laps;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="string", length=25, nullable=true)
      */
     private $time;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $milliseconds;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $fastestLap;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $rank;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="string", length=25, nullable=true)
      */
     private $fastestLapTime;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="string", length=25, nullable=true)
      */
     private $fastestLapSpeed;
 

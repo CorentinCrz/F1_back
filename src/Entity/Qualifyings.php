@@ -45,17 +45,17 @@ class Qualifyings
     private $position;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="string", length=25, nullable=true)
      */
     private $q1;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="string", length=25, nullable=true)
      */
     private $q2;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="string", length=25, nullable=true)
      */
     private $q3;
 

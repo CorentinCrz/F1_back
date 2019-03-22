@@ -39,7 +39,7 @@ class LapTimes
     private $position;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="string", length=25)
      */
     private $time;
 

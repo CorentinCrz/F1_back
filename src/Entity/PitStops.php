@@ -44,7 +44,7 @@ class PitStops
     private $time;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="string", length=25)
      */
     private $duration;
 
