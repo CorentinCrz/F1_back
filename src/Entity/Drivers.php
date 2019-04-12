@@ -63,6 +63,11 @@ class Drivers
      */
     private $url;
 
+    /**
+     * @ORM\Column(type="string", length=2000)
+     */
+    private $imgUrl;
+
 //    /**
 //     * @ORM\OneToMany(targetEntity="App\Entity\Results", mappedBy="driver", orphanRemoval=true)
 //     */
@@ -170,6 +175,18 @@ class Drivers
     public function setUrl(string $url): self
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    public function getImgUrl(): ?string
+    {
+        return $this->imgUrl;
+    }
+
+    public function setImgUrl(string $imgUrl): self
+    {
+        $this->imgUrl = $imgUrl;
 
         return $this;
     }
