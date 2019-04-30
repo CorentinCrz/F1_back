@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
@@ -20,42 +21,50 @@ class Races
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("results")
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("results")
      */
     private $year;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("results")
      */
     private $round;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Circuits")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("results")
      */
     private $circuit;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("results")
      */
     private $name;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups("results")
      */
     private $date;
 
     /**
      * @ORM\Column(type="time")
+     * @Groups("results")
      */
     private $time;
 
     /**
      * @ORM\Column(type="string", length=2000)
+     * @Groups("results")
      */
     private $url;
 
