@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
+ *     normalizationContext={"groups"={"results"}},
  *     collectionOperations={"get"},
  *     itemOperations={"get"}
  * )
@@ -18,89 +20,106 @@ class Results
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("results")
      */
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Races", inversedBy="results")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Races")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("results")
      */
     private $race;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Drivers", inversedBy="results")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Drivers")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("results")
      */
     private $driver;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Constructors", inversedBy="results")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Constructors")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("results")
      */
     private $constructor;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"results"})
      */
     private $number;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"results"})
      */
     private $grid;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"results"})
      */
     private $position;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"results"})
      */
     private $positionOrder;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"results"})
      */
     private $points;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"results"})
      */
     private $laps;
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
+     * @Groups({"results"})
      */
     private $time;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"results"})
      */
     private $milliseconds;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"results"})
      */
     private $fastestLap;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"results"})
      */
     private $rank;
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
+     * @Groups({"results"})
      */
     private $fastestLapTime;
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
+     * @Groups({"results"})
      */
     private $fastestLapSpeed;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Status")
+     * @Groups({"results"})
      */
     private $status;
 

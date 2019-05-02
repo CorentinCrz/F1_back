@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
@@ -20,51 +21,61 @@ class Drivers
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"results"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"results"})
      */
     private $reference;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"results"})
      */
     private $number;
 
     /**
      * @ORM\Column(type="string", length=5, nullable=true)
+     * @Groups({"results"})
      */
     private $code;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"results"})
      */
     private $forename;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"results"})
      */
     private $surname;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups({"results"})
      */
     private $dob;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"results"})
      */
     private $nationality;
 
     /**
      * @ORM\Column(type="string", length=2000)
+     * @Groups({"results"})
      */
     private $url;
 
     /**
      * @ORM\Column(type="string", length=2000)
+     * @Groups({"results"})
      */
     private $imgUrl;
 
