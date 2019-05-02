@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
@@ -18,46 +19,55 @@ class Circuits
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("results")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups("results")
      */
     private $reference;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("results")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups("results")
      */
     private $location;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups("results")
      */
     private $country;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups("results")
      */
     private $lat;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups("results")
      */
     private $lng;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Groups("results")
      */
     private $alt;
 
     /**
      * @ORM\Column(type="string", length=2000)
+     * @Groups("results")
      */
     private $url;
 
