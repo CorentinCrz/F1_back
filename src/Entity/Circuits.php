@@ -19,55 +19,55 @@ class Circuits
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $reference;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $location;
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $country;
 
     /**
      * @ORM\Column(type="float")
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $lat;
 
     /**
      * @ORM\Column(type="float")
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $lng;
 
     /**
      * @ORM\Column(type="float", nullable=true)
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $alt;
 
     /**
      * @ORM\Column(type="string", length=2000)
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $url;
 

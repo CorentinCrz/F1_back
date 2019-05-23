@@ -7,12 +7,19 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={"get"}
+ *     itemOperations={
+ *         "get"={
+ *             "normalization_context"={"groups"={"races"}}
+ *         }
+ *     }
  * )
+ * @ApiFilter(SearchFilter::class, properties={"year": "exact"})
  * @ORM\Entity(repositoryClass="App\Repository\RacesRepository")
  */
 class Races
@@ -21,50 +28,50 @@ class Races
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $year;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $round;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Circuits")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $circuit;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="date")
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $date;
 
     /**
      * @ORM\Column(type="time")
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $time;
 
     /**
      * @ORM\Column(type="string", length=2000)
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $url;
 
@@ -72,16 +79,17 @@ class Races
 //     * @ORM\OneToMany(targetEntity="App\Entity\LapTimes", mappedBy="race", orphanRemoval=true)
 //     */
 //    private $lapTimes;
-//
-//    /**
-//     * @ORM\OneToMany(targetEntity="App\Entity\Results", mappedBy="race", orphanRemoval=true)
-//     */
-//    private $results;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Results", mappedBy="race", orphanRemoval=true)
+     * @Groups("races")
+     */
+    private $results;
 
     public function __construct()
     {
 //        $this->lapTimes = new ArrayCollection();
-//        $this->results = new ArrayCollection();
+        $this->results = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -203,37 +211,37 @@ class Races
 //
 //        return $this;
 //    }
-//
-//    /**
-//     * @return Collection|Results[]
-//     */
-//    public function getResults(): Collection
-//    {
-//        return $this->results;
-//    }
-//
-//    public function addResult(Results $result): self
-//    {
-//        if (!$this->results->contains($result)) {
-//            $this->results[] = $result;
-//            $result->setRace($this);
-//        }
-//
-//        return $this;
-//    }
-//
-//    public function removeResult(Results $result): self
-//    {
-//        if ($this->results->contains($result)) {
-//            $this->results->removeElement($result);
-//            // set the owning side to null (unless already changed)
-//            if ($result->getRace() === $this) {
-//                $result->setRace(null);
-//            }
-//        }
-//
-//        return $this;
-//    }
+
+    /**
+     * @return Collection|Results[]
+     */
+    public function getResults(): Collection
+    {
+        return $this->results;
+    }
+
+    public function addResult(Results $result): self
+    {
+        if (!$this->results->contains($result)) {
+            $this->results[] = $result;
+            $result->setRace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResult(Results $result): self
+    {
+        if ($this->results->contains($result)) {
+            $this->results->removeElement($result);
+            // set the owning side to null (unless already changed)
+            if ($result->getRace() === $this) {
+                $result->setRace(null);
+            }
+        }
+
+        return $this;
+    }
 
     public function __toString()
     {
