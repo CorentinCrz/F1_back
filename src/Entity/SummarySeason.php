@@ -50,7 +50,7 @@ class SummarySeason
     private $wins;
 
     /**
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="string", length=25, nullable=true)
      */
     private $cumulativeTime;
 
@@ -141,12 +141,12 @@ class SummarySeason
         return $this;
     }
 
-    public function getCumulativeTime(): ?\DateTimeInterface
+    public function getCumulativeTime(): ?string
     {
         return $this->cumulativeTime;
     }
 
-    public function setCumulativeTime(?\DateTimeInterface $cumulativeTime): self
+    public function setCumulativeTime(?string $cumulativeTime): self
     {
         $this->cumulativeTime = $cumulativeTime;
 
