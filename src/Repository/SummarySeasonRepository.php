@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Summaryseason;
+use App\Entity\SummarySeason;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Summaryseason|null find($id, $lockMode = null, $lockVersion = null)
- * @method Summaryseason|null findOneBy(array $criteria, array $orderBy = null)
- * @method Summaryseason[]    findAll()
- * @method Summaryseason[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method SummarySeason|null find($id, $lockMode = null, $lockVersion = null)
+ * @method SummarySeason|null findOneBy(array $criteria, array $orderBy = null)
+ * @method SummarySeason[]    findAll()
+ * @method SummarySeason[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SummaryseasonRepository extends ServiceEntityRepository
+class SummarySeasonRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Summaryseason::class);
+        parent::__construct($registry, SummarySeason::class);
     }
 
     // /**
-    //  * @return Summaryseason[] Returns an array of Summaryseason objects
+    //  * @return SummarySeason[] Returns an array of SummarySeason objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class SummaryseasonRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Summaryseason
+    public function findOneBySomeField($value): ?SummarySeason
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')
