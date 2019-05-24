@@ -33,25 +33,25 @@ class Drivers
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"results", "races"})
+     * @Groups({"results", "races", "summarySeason"})
      */
     private $number;
 
     /**
      * @ORM\Column(type="string", length=5, nullable=true)
-     * @Groups({"results", "races"})
+     * @Groups({"results", "races", "summarySeason"})
      */
     private $code;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"results", "races"})
+     * @Groups({"results", "races", "summarySeason"})
      */
     private $forename;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"results", "races"})
+     * @Groups({"results", "races", "summarySeason"})
      */
     private $surname;
 
@@ -63,7 +63,7 @@ class Drivers
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"results", "races"})
+     * @Groups({"results", "races", "summarySeason"})
      */
     private $nationality;
 
@@ -75,7 +75,7 @@ class Drivers
 
     /**
      * @ORM\Column(type="string", length=2000)
-     * @Groups({"results", "races"})
+     * @Groups({"results", "races", "summarySeason"})
      */
     private $imgUrl;
 

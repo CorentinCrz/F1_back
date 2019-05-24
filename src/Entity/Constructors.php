@@ -33,13 +33,13 @@ class Constructors
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"results", "races"})
+     * @Groups({"results", "races", "summarySeason"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"results", "races"})
+     * @Groups({"results", "races", "summarySeason"})
      */
     private $nationality;
 
