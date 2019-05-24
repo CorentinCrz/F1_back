@@ -1,20 +1,20 @@
-easy_admin:
-    formats:
-        date:     'd/m/Y'
-        time:     'H:i:s'
-        datetime: 'd/m/Y H:i:s'
-    entities:
-        # List the entity class name you want to manage
-        - App\Entity\Circuits
-        - App\Entity\ConstructorResults
-        - App\Entity\Constructors
-        - App\Entity\ConstructorStandings
-        - App\Entity\Drivers
-        - App\Entity\DriverStandings
-        - App\Entity\LapTimes
-        - App\Entity\PitStops
-        - App\Entity\Qualifyings
-        - App\Entity\Races
-        - App\Entity\Results
-        - App\Entity\Seasons
-        - App\Entity\Status
+#easy_admin:
+#    formats:
+#        date:     'd/m/Y'
+#        time:     'H:i:s'
+#        datetime: 'd/m/Y H:i:s'
+#    entities:
+#        # List the entity class name you want to manage
+#        - App\Entity\Circuits
+#        - App\Entity\ConstructorResults
+#        - App\Entity\Constructors
+#        - App\Entity\ConstructorStandings
+#        - App\Entity\Drivers
+#        - App\Entity\DriverStandings
+#        - App\Entity\LapTimes
+#        - App\Entity\PitStops
+#        - App\Entity\Qualifyings
+#        - App\Entity\Races
+#        - App\Entity\Results
+#        - App\Entity\Seasons
+#        - App\Entity\Status
