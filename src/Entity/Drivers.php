@@ -21,61 +21,61 @@ class Drivers
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"results"})
+     * @Groups({"results", "races"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"results"})
+     * @Groups({"results", "races"})
      */
     private $reference;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"results"})
+     * @Groups({"results", "races"})
      */
     private $number;
 
     /**
      * @ORM\Column(type="string", length=5, nullable=true)
-     * @Groups({"results"})
+     * @Groups({"results", "races"})
      */
     private $code;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"results"})
+     * @Groups({"results", "races"})
      */
     private $forename;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"results"})
+     * @Groups({"results", "races"})
      */
     private $surname;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Groups({"results"})
+     * @Groups({"results", "races"})
      */
     private $dob;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"results"})
+     * @Groups({"results", "races"})
      */
     private $nationality;
 
     /**
      * @ORM\Column(type="string", length=2000)
-     * @Groups({"results"})
+     * @Groups({"results", "races"})
      */
     private $url;
 
     /**
      * @ORM\Column(type="string", length=2000)
-     * @Groups({"results"})
+     * @Groups({"results", "races"})
      */
     private $imgUrl;
 

@@ -4,12 +4,17 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 
 /**
  * @ApiResource(
  *     collectionOperations={"get"},
  *     itemOperations={"get"}
  * )
+ * @ApiFilter(SearchFilter::class, properties={"race.year": "exact", "driver.id": "exact"})
+ * @ApiFilter(OrderFilter::class, properties={"points"}, arguments={"orderParameterName"="order"})
  * @ORM\Entity(repositoryClass="App\Repository\DriverStandingsRepository")
  */
 class DriverStandings

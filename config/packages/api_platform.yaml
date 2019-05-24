@@ -2,3 +2,6 @@ api_platform:
     title: 'Formula One'
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
+    collection:
+        pagination:
+            client_items_per_page: true # Disabled by default

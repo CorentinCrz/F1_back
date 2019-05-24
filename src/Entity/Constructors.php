@@ -21,31 +21,31 @@ class Constructors
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $reference;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $nationality;
 
     /**
      * @ORM\Column(type="string", length=2000)
-     * @Groups("results")
+     * @Groups({"results", "races"})
      */
     private $url;
 

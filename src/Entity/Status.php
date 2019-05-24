@@ -19,13 +19,13 @@ class Status
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"results"})
+     * @Groups({"results", "races"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"results"})
+     * @Groups({"results", "races"})
      */
     private $name;
 
