@@ -4,9 +4,17 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"summarySeason"}},
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"}
+ * )
+ * @ApiFilter(SearchFilter::class, properties={"year": "exact"})
  * @ORM\Entity(repositoryClass="App\Repository\SummarySeasonRepository")
  */
 class SummarySeason
@@ -20,47 +28,56 @@ class SummarySeason
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"summarySeason"})
      */
     private $year;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Drivers")
+     * @Groups({"summarySeason"})
      */
     private $driver;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Constructors")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"summarySeason"})
      */
     private $constructor;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"summarySeason"})
      */
     private $score;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"summarySeason"})
      */
     private $position;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"summarySeason"})
      */
     private $wins;
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
+     * @Groups({"summarySeason"})
      */
     private $cumulativeTime;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Groups({"summarySeason"})
      */
     private $fastestLapSpeed;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"summarySeason"})
      */
     private $mediumGrid;
 

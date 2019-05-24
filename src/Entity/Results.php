@@ -31,7 +31,7 @@ class Results
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Races")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Races", inversedBy="results")
      * @ORM\JoinColumn(nullable=false)
      * @Groups("results")
      */
