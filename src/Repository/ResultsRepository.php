@@ -19,22 +19,22 @@ class ResultsRepository extends ServiceEntityRepository
         parent::__construct($registry, Results::class);
     }
 
-    // /**
-    //  * @return Results[] Returns an array of Results objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Results[] Returns an array of Results objects
+      */
+    public function findByYearAndDriver($year, $driver)
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
+            ->leftJoin('r.race', 'ra')
+            ->andWhere('r.driver = :driver')
+            ->andWhere('ra.year = :year')
+            ->setParameter('driver', $driver)
+            ->setParameter('year', $year)
             ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Results
