@@ -116,7 +116,7 @@ class SummarySeasonCommand extends Command
 
             // select driverStandings data
             $driverStanding = $this->entityManager->getRepository(DriverStandings::class)
-                ->findLastByDriver($driver);
+                ->findLastByDriverAndYear($driver, $year);
 
             $summarySeason->setScore($driverStanding->getPoints());
             $summarySeason->setPosition($driverStanding->getPosition());

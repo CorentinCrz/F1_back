@@ -36,10 +36,13 @@ class DriverStandingsRepository extends ServiceEntityRepository
     }
     */
 
-    public function findLastByDriver($driver): ?DriverStandings
+    public function findLastByDriverAndYear($driver, $year): ?DriverStandings
     {
         return $this->createQueryBuilder('d')
             ->andWhere('d.driver = :driver')
+            ->leftJoin('d.race', 'r')
+            ->andWhere('r.year = :year')
+            ->setParameter('year', $year)
             ->setParameter('driver', $driver)
             ->orderBy('d.points', 'DESC')
             ->setMaxResults(1)
