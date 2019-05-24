@@ -36,15 +36,15 @@ class DriverStandingsRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?DriverStandings
+    public function findLastByDriver($driver): ?DriverStandings
     {
         return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('d.driver = :driver')
+            ->setParameter('driver', $driver)
+            ->orderBy('d.points', 'DESC')
+            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
 }
