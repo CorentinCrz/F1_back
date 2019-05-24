@@ -22,7 +22,7 @@ class LapTimes
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Races", inversedBy="lapTimes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Races")
      * @ORM\JoinColumn(nullable=false)
      */
     private $race;
