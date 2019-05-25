@@ -6,9 +6,19 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"summarySeason"}},
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"}
+ * )
+ * @ApiFilter(SearchFilter::class, properties={"year": "exact"})
+ * @ApiFilter(OrderFilter::class, properties={"score"}, arguments={"orderParameterName"="order"})
  * @ORM\Entity(repositoryClass="App\Repository\SummarySeasonConstructorRepository")
  */
 class SummarySeasonConstructor
@@ -22,47 +32,56 @@ class SummarySeasonConstructor
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"summarySeason"})
      */
     private $year;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Constructors")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"summarySeason"})
      */
     private $constructor;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Drivers")
+     * @Groups({"summarySeason"})
      */
     private $drivers;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"summarySeason"})
      */
     private $score;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"summarySeason"})
      */
     private $position;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"summarySeason"})
      */
     private $wins;
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
+     * @Groups({"summarySeason"})
      */
     private $cumulativeTime;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Groups({"summarySeason"})
      */
     private $fastestLapSpeed;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"summarySeason"})
      */
     private $mediumGrid;
 
