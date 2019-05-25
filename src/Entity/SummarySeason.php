@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 
 /**
  * @ApiResource(
@@ -15,6 +16,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *     itemOperations={"get"}
  * )
  * @ApiFilter(SearchFilter::class, properties={"year": "exact"})
+ * @ApiFilter(OrderFilter::class, properties={"score"}, arguments={"orderParameterName"="order"})
  * @ORM\Entity(repositoryClass="App\Repository\SummarySeasonRepository")
  */
 class SummarySeason
