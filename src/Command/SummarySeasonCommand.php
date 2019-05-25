@@ -1,7 +1,9 @@
 <?php
 namespace App\Command;
 
+use App\Entity\ConstructorStandings;
 use App\Entity\Races;
+use App\Entity\SummarySeasonConstructor;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,6 +19,8 @@ class SummarySeasonCommand extends Command
     protected static $defaultName = 'create:summary';
 
     private $entityManager;
+
+    private $year;
 
 
     public function __construct(EntityManagerInterface $entityManager)
@@ -53,37 +57,52 @@ class SummarySeasonCommand extends Command
         ]);
 
         // get year from input
-        $year = (int)$input->getArgument('year');
+        $this->year = (int)$input->getArgument('year');
 
         // select the first race of one year
         $firstRace = $this->entityManager->getRepository(Races::class)
             ->findOneBy([
-                'year' => $year,
+                'year' => $this->year,
                 'round' => 1
             ]);
 
         // get all drivers for one year
         $drivers = [];
+        $constructors = [];
         foreach ($firstRace->getResults() as $results){
             $drivers[] = $results->getDriver();
+            $constructors[] = $results->getConstructor();
         }
 
-        // loop for every driver and create one SummarySeason in doctrine
-        foreach ($drivers as $driver) {
-            // check for an old summarySeason data
-            $old = $this->entityManager->getRepository(SummarySeason::class)
-                ->findOneBy([
-                    'driver' => $driver,
-                    'year' => $year
-                ]);
+        $this->loop(array_unique($constructors), false);
+        $this->loop($drivers);
+
+        // display end message
+        $output->writeln('Entity SummarySeason filled !');
+    }
+
+    public function loop($array, $isDriver = true)
+    {
+        // loop for every driver/constructor and create one SummarySeason/SummarySeasonConstructor in doctrine
+        foreach ($array as $driverOrConstructor) {
+            // check for an old summarySeason/summarySeasonConstructor data
+            $query = $isDriver ? [
+                'driver' => $driverOrConstructor,
+                'year' => $this->year
+            ] : [
+                'constructor' => $driverOrConstructor,
+                'year' => $this->year
+            ];
+            $old = $this->entityManager->getRepository($isDriver ? SummarySeason::class : SummarySeasonConstructor::class)//
+            ->findOneBy($query);
 
             if (!is_null($old)){
                 continue;
             }
 
-            // select all results for one driver in one season
-            $results = $this->entityManager->getRepository(Results::class)
-                ->findByYearAndDriver($year, $driver);
+            // select all results for one driver/constructor in one season
+            $resultRepository = $this->entityManager->getRepository(Results::class);
+            $results = $isDriver ? $resultRepository->findByYearAndDriver($this->year, $driverOrConstructor) : $resultRepository->findByYearAndConstructor($this->year, $driverOrConstructor);
 
             // temp array to calculate average data
             $tmp = [];
@@ -91,14 +110,19 @@ class SummarySeasonCommand extends Command
             $tmp['fastestLapSpeed'] = 0;
             $tmp['mediumGrid'] = 0;
             $tmp['total'] = 0;
+            $tmp['lastRound'] = 0;
+            $tmp['drivers'] = [];
             // add data for each results
             foreach ($results as $result){
                 $tmp['cumulativeTime'] += (int)$result->getMilliseconds();
                 $tmp['fastestLapSpeed'] = $tmp['fastestLapSpeed'] < $result->getFastestLapSpeed() ? (float)$result->getFastestLapSpeed() : $tmp['fastestLapSpeed'];
+                $tmp['lastRound'] = $tmp['lastRound'] < $result->getRace()->getRound() ? (int)$result->getRace()->getRound() : $tmp['lastRound'];
                 $tmp['mediumGrid'] += (int)$result->getRank();
                 $tmp['total'] ++;
                 $tmp['constructor'] = $result->getConstructor();
+                $tmp['drivers'][] = $result->getDriver();
             }
+            $tmp['drivers'] = array_unique($tmp['drivers']);
 
             // calculate average and time from hours from milliseconds
             $hours = (int) ($tmp['cumulativeTime'] / (1000 * 60 * 60));
@@ -106,17 +130,24 @@ class SummarySeasonCommand extends Command
             $seconds = (($tmp['cumulativeTime']-((($hours * 60) + $minutes) * 1000 * 60)) / 1000);
 
             // add data to object
-            $summarySeason = new SummarySeason();
-            $summarySeason->setYear($year);
-            $summarySeason->setDriver($driver);
-            $summarySeason->setConstructor($tmp['constructor']);
+            $summarySeason = $isDriver ? new SummarySeason() : new SummarySeasonConstructor();
+            $summarySeason->setYear($this->year);
+            if ($isDriver){
+                $summarySeason->setDriver($driverOrConstructor);
+                $summarySeason->setConstructor($tmp['constructor']);
+            } else {
+                $summarySeason->setConstructor($driverOrConstructor);
+                foreach ($tmp['drivers'] as $dri) {
+                    $summarySeason->addDriver($dri);
+                }
+            }
             $summarySeason->setCumulativeTime($hours . ':' . $minutes . ':' . $seconds);
             $summarySeason->setFastestLapSpeed($tmp['fastestLapSpeed']);
             $summarySeason->setMediumGrid(round($tmp['mediumGrid']/$tmp['total']));
 
-            // select driverStandings data
-            $driverStanding = $this->entityManager->getRepository(DriverStandings::class)
-                ->findLastByDriverAndYear($driver, $year);
+            // select driverStandings/constructorStandings data
+            $driverStanding = $this->entityManager->getRepository($isDriver ? DriverStandings::class : ConstructorStandings::class)
+                ->findLastByDriverAndYear($driverOrConstructor, $this->year, $tmp['lastRound']);
 
             $summarySeason->setScore($driverStanding->getPoints());
             $summarySeason->setPosition($driverStanding->getPosition());
@@ -126,8 +157,5 @@ class SummarySeasonCommand extends Command
             $this->entityManager->persist($summarySeason);
             $this->entityManager->flush();
         }
-
-        // display end message
-        $output->writeln('Entity SummarySeason filled !');
     }
 }

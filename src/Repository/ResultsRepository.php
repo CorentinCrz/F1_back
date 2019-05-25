@@ -36,6 +36,23 @@ class ResultsRepository extends ServiceEntityRepository
         ;
     }
 
+     /**
+      * @return Results[] Returns an array of Results objects
+      */
+    public function findByYearAndConstructor($year, $constructor)
+    {
+        return $this->createQueryBuilder('r')
+            ->leftJoin('r.race', 'ra')
+            ->andWhere('r.constructor = :constructor')
+            ->andWhere('ra.year = :year')
+            ->setParameter('constructor', $constructor)
+            ->setParameter('year', $year)
+            ->orderBy('r.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     /*
     public function findOneBySomeField($value): ?Results
     {

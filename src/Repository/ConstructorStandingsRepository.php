@@ -47,4 +47,21 @@ class ConstructorStandingsRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findLastByDriverAndYear($constructor, $year, $round): ?ConstructorStandings
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.constructor = :constructor')
+            ->leftJoin('d.race', 'r')
+            ->andWhere('r.year = :year')
+            ->andWhere('r.round = :round')
+            ->setParameter('year', $year)
+            ->setParameter('round', $round)
+            ->setParameter('constructor', $constructor)
+            ->orderBy('d.points', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
 }
