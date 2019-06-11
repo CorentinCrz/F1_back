@@ -91,6 +91,12 @@ class SummarySeasonConstructor
      */
     private $mediumGrid;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"summarySeason"})
+     */
+    private $pitStopTime;
+
     public function __construct()
     {
         $this->drivers = new ArrayCollection();
@@ -231,6 +237,18 @@ class SummarySeasonConstructor
     public function setMediumGrid(?int $mediumGrid): self
     {
         $this->mediumGrid = $mediumGrid;
+
+        return $this;
+    }
+
+    public function getPitStopTime(): ?int
+    {
+        return $this->pitStopTime;
+    }
+
+    public function setPitStopTime(?int $pitStopTime): self
+    {
+        $this->pitStopTime = $pitStopTime;
 
         return $this;
     }

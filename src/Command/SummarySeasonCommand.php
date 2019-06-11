@@ -2,6 +2,7 @@
 namespace App\Command;
 
 use App\Entity\ConstructorStandings;
+use App\Entity\PitStops;
 use App\Entity\Races;
 use App\Entity\SummarySeasonConstructor;
 use Doctrine\ORM\EntityManagerInterface;
@@ -121,6 +122,7 @@ class SummarySeasonCommand extends Command
             $tmp['total'] = 0;
             $tmp['lastRound'] = 0;
             $tmp['drivers'] = [];
+            $tmp['pit_stops'] = [];
             // add data for each results
             foreach ($results as $result){
                 $tmp['cumulativeTime'] += (int)$result->getMilliseconds();
@@ -130,6 +132,16 @@ class SummarySeasonCommand extends Command
                 $tmp['total'] ++;
                 $tmp['constructor'] = $result->getConstructor();
                 $tmp['drivers'][] = $result->getDriver();
+                if (!$isDriver) {
+                    $pitStops = $this->entityManager->getRepository(PitStops::class)
+                        ->findBy([
+                            'race' => $result->getrace(),
+                            'driver' => $result->getDriver()
+                        ]);
+                    foreach ($pitStops as $pitStop){
+                        $tmp['pit_stops'][] = $pitStop->getMilliseconds();
+                    }
+                }
             }
             $tmp['drivers'] = array_unique($tmp['drivers']);
 
@@ -145,6 +157,11 @@ class SummarySeasonCommand extends Command
                 $summarySeason->setDriver($driverOrConstructor);
                 $summarySeason->setConstructor($tmp['constructor']);
             } else {
+                $temp = 0;
+                foreach ($tmp['pit_stops'] as $pitStop){
+                    $temp += $pitStop;
+                }
+                $summarySeason->setPitStopTime($temp / count($tmp['pit_stops']));
                 $summarySeason->setConstructor($driverOrConstructor);
                 foreach ($tmp['drivers'] as $dri) {
                     $summarySeason->addDriver($dri);
