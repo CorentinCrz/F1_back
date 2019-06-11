@@ -161,7 +161,7 @@ class SummarySeasonCommand extends Command
                 foreach ($tmp['pit_stops'] as $pitStop){
                     $temp += $pitStop;
                 }
-                $summarySeason->setPitStopTime($temp / count($tmp['pit_stops']));
+                $summarySeason->setPitStopTime(count($tmp['pit_stops']) === 0 ? null : $temp / count($tmp['pit_stops']));
                 $summarySeason->setConstructor($driverOrConstructor);
                 foreach ($tmp['drivers'] as $dri) {
                     $summarySeason->addDriver($dri);
