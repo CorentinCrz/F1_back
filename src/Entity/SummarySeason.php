@@ -72,6 +72,12 @@ class SummarySeason
     private $cumulativeTime;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"summarySeason"})
+     */
+    private $cumulativeMillisecond;
+
+    /**
      * @ORM\Column(type="float", nullable=true)
      * @Groups({"summarySeason"})
      */
@@ -168,6 +174,18 @@ class SummarySeason
     public function setCumulativeTime(?string $cumulativeTime): self
     {
         $this->cumulativeTime = $cumulativeTime;
+
+        return $this;
+    }
+
+    public function getCumulativeMillisecond(): ?int
+    {
+        return $this->cumulativeMillisecond;
+    }
+
+    public function setCumulativeMillisecond(?int $cumulativeMillisecond): self
+    {
+        $this->cumulativeMillisecond = $cumulativeMillisecond;
 
         return $this;
     }

@@ -21,6 +21,7 @@ class SummarySeasonCommand extends Command
     private $entityManager;
 
     private $year;
+    private $force;
 
 
     public function __construct(EntityManagerInterface $entityManager)
@@ -42,6 +43,9 @@ class SummarySeasonCommand extends Command
 
             // create required argument
             ->addArgument('year', InputArgument::REQUIRED, 'Year to use (ex. "2018").')
+
+            // create required argument
+            ->addArgument('force', InputArgument::OPTIONAL, 'Erase old data.')
         ;
     }
 
@@ -58,6 +62,7 @@ class SummarySeasonCommand extends Command
 
         // get year from input
         $this->year = (int)$input->getArgument('year');
+        $this->force = $input->getArgument('force') === 'force' ? true : false;
 
         // select the first race of one year
         $firstRace = $this->entityManager->getRepository(Races::class)
@@ -97,7 +102,11 @@ class SummarySeasonCommand extends Command
             ->findOneBy($query);
 
             if (!is_null($old)){
-                continue;
+                if ($this->force){
+                    $this->entityManager->remove($old);
+                } else {
+                    continue;
+                }
             }
 
             // select all results for one driver/constructor in one season
@@ -142,6 +151,7 @@ class SummarySeasonCommand extends Command
                 }
             }
             $summarySeason->setCumulativeTime($hours . ':' . $minutes . ':' . $seconds);
+            $summarySeason->setCumulativeMillisecond($tmp['cumulativeTime']);
             $summarySeason->setFastestLapSpeed($tmp['fastestLapSpeed']);
             $summarySeason->setMediumGrid(round($tmp['mediumGrid']/$tmp['total']));
 
