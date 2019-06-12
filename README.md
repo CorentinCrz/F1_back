@@ -18,7 +18,7 @@ Partie Back end.
     * Open source
     * Grande communauté
     * Framework très stable
-    * Avoir a disposition un ensemble de composants PHP réutilisables
+    * Avoir à disposition un ensemble de composants PHP réutilisables
     * Mettre fin au code répétitif
     * Accélérer la création de notre api
 * [Doctrine](https://www.doctrine-project.org/)
