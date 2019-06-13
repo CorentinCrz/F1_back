@@ -50,19 +50,19 @@ class SummarySeasonConstructor
     private $drivers;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @Groups({"summarySeason"})
      */
     private $score;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @Groups({"summarySeason"})
      */
     private $position;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @Groups({"summarySeason"})
      */
     private $wins;
@@ -90,6 +90,12 @@ class SummarySeasonConstructor
      * @Groups({"summarySeason"})
      */
     private $mediumGrid;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"summarySeason"})
+     */
+    private $nbFirstGrid;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -249,6 +255,18 @@ class SummarySeasonConstructor
     public function setPitStopTime(?int $pitStopTime): self
     {
         $this->pitStopTime = $pitStopTime;
+
+        return $this;
+    }
+
+    public function getNbFirstGrid(): ?int
+    {
+        return $this->nbFirstGrid;
+    }
+
+    public function setNbFirstGrid(?int $nbFirstGrid): self
+    {
+        $this->nbFirstGrid = $nbFirstGrid;
 
         return $this;
     }

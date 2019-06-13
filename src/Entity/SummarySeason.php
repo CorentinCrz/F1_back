@@ -48,19 +48,19 @@ class SummarySeason
     private $constructor;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @Groups({"summarySeason"})
      */
     private $score;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @Groups({"summarySeason"})
      */
     private $position;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @Groups({"summarySeason"})
      */
     private $wins;
@@ -88,6 +88,12 @@ class SummarySeason
      * @Groups({"summarySeason"})
      */
     private $mediumGrid;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"summarySeason"})
+     */
+    private $nbFirstGrid;
 
     public function getId(): ?int
     {
@@ -210,6 +216,18 @@ class SummarySeason
     public function setMediumGrid(?int $mediumGrid): self
     {
         $this->mediumGrid = $mediumGrid;
+
+        return $this;
+    }
+
+    public function getNbFirstGrid(): ?int
+    {
+        return $this->nbFirstGrid;
+    }
+
+    public function setNbFirstGrid(?int $nbFirstGrid): self
+    {
+        $this->nbFirstGrid = $nbFirstGrid;
 
         return $this;
     }
