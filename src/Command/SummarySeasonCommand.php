@@ -119,6 +119,7 @@ class SummarySeasonCommand extends Command
             $tmp['cumulativeTime'] = 0;
             $tmp['fastestLapSpeed'] = 0;
             $tmp['mediumGrid'] = 0;
+            $tmp['nbFirstGrid'] = 0;
             $tmp['total'] = 0;
             $tmp['lastRound'] = 0;
             $tmp['drivers'] = [];
@@ -129,6 +130,7 @@ class SummarySeasonCommand extends Command
                 $tmp['fastestLapSpeed'] = $tmp['fastestLapSpeed'] < $result->getFastestLapSpeed() ? (float)$result->getFastestLapSpeed() : $tmp['fastestLapSpeed'];
                 $tmp['lastRound'] = $tmp['lastRound'] < $result->getRace()->getRound() ? (int)$result->getRace()->getRound() : $tmp['lastRound'];
                 $tmp['mediumGrid'] += (int)$result->getRank();
+                $tmp['nbFirstGrid'] += (int)$result->getRank() === 1 ? 1 : 0;
                 $tmp['total'] ++;
                 $tmp['constructor'] = $result->getConstructor();
                 $tmp['drivers'][] = $result->getDriver();
@@ -167,18 +169,21 @@ class SummarySeasonCommand extends Command
                     $summarySeason->addDriver($dri);
                 }
             }
-            $summarySeason->setCumulativeTime($hours . ':' . $minutes . ':' . $seconds);
+            $summarySeason->setCumulativeTime($hours . ' h ' . $minutes . ' m ' . $seconds);
             $summarySeason->setCumulativeMillisecond($tmp['cumulativeTime']);
             $summarySeason->setFastestLapSpeed($tmp['fastestLapSpeed']);
             $summarySeason->setMediumGrid(round($tmp['mediumGrid']/$tmp['total']));
+            $summarySeason->setNbFirstGrid($tmp['nbFirstGrid']);
 
             // select driverStandings/constructorStandings data
             $driverStanding = $this->entityManager->getRepository($isDriver ? DriverStandings::class : ConstructorStandings::class)
                 ->findLastByDriverAndYear($driverOrConstructor, $this->year, $tmp['lastRound']);
 
-            $summarySeason->setScore($driverStanding->getPoints());
-            $summarySeason->setPosition($driverStanding->getPosition());
-            $summarySeason->setWins($driverStanding->getWins());
+            if (!is_null($driverStanding)) {
+                $summarySeason->setScore($driverStanding->getPoints());
+                $summarySeason->setPosition($driverStanding->getPosition());
+                $summarySeason->setWins($driverStanding->getWins());
+            }
 
             // persist to doctrine
             $this->entityManager->persist($summarySeason);
